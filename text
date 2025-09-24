@@ -1,1 +1,7 @@
 git rm --cached -r .
+
+
+git rm -r --cached node_modules dist dist-ssr
+git rm --cached src/.env .env
+git commit -m "chore: untrack ignored files"
+git push
