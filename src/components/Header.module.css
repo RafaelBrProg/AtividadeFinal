@@ -1,0 +1,94 @@
+.header {
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  position: relative; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  font-family: var(--font-family-body);
+}
+
+.portalBtn {
+  margin-left: 1rem;
+  background-color: transparent;
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+}
+
+.cartContainer {
+  position: absolute; 
+  top: 25px;
+  right: 30px;
+  cursor: pointer;
+  z-index: 10; 
+  display: flex;
+  align-items: center;
+}
+
+.cartIcon {
+  width: 35px;
+  height: 35px;
+  color: white;
+  transition: color 0.3s ease;
+}
+
+.cartContainer:hover .cartIcon {
+  color: var(--primary-color);
+}
+
+.cartBadge {
+  background-color: var(--primary-color);
+  color: var(--background-color);
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: bold;
+  font-family: var(--font-family-body);
+  margin-left: -10px;
+  margin-top: -15px;
+  border: 2px solid var(--background-color);
+}
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.2rem;
+  }
+}
+
+  .portalBtn {
+    margin-left: 0.5rem;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }

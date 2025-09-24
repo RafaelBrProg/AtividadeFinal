@@ -1,0 +1,27 @@
+.table {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--primary-color);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 2rem;
+}
+.row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.row:not(:last-child) {
+    border-bottom: 1px solid var(--primary-color);
+}
+.cell {
+    padding: 1rem;
+    background-color: var(--card-background);
+}
+.cell:first-child {
+    border-right: 1px solid var(--primary-color);
+}
+.header {
+    background-color: #333;
+    font-weight: bold;
+    color: var(--primary-color);
+}
