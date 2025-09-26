@@ -47,4 +47,20 @@ res.status(500).send('Erro no servidor');
 
 // SUA VEZ: (READ) GET /orders
 // Crie a função para buscar todos os pedidos do usuário logado.
-// exports.getUserOrders = async (req, res) => { ... }
+exports.getUserOrders = async (req, res) => {
+    try {
+      // 1. Busque os pedidos do usuário logado. Vamos usar o ID do usuário para filtrar os pedidos.
+      const orders = await Order.find({ user: req.user.id }).populate('products.productId');
+  
+      // 2. Se não houver pedidos, envie uma mensagem indicando que o usuário ainda não fez pedidos.
+      if (!orders || orders.length === 0) {
+        return res.status(404).json({ msg: 'Você ainda não fez nenhum pedido.' });
+      }
+  
+      // 3. Se houver pedidos, retorne os pedidos encontrados.
+      res.status(200).json(orders);
+    } catch (err) {
+      // Caso ocorra algum erro no processo, envie uma mensagem de erro.
+      res.status(500).send('Erro no servidor');
+    }
+  };

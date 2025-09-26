@@ -1,103 +1,136 @@
 const Product = require('../models/Product');
+const { body, validationResult } = require('express-validator');
+const { verifyToken, isAdmin } = require('../middleware/auth');
 
-// EXEMPLO: (CREATE) POST /products - Apenas para admins
-exports.createProduct = async (req, res) => {
-  try {
-    // 1. Como esta é uma rota de admin, não precisamos verificar quem está criando.
-    // O middleware `admin` já fez essa verificação para nós.
-    // 2. Crie uma nova instância do modelo Product com os dados do `req.body`.
-    const newProduct = new Product(req.body);
+// (CREATE) POST /products - Apenas para admins
+exports.createProduct = [
+  // Validação
+  body('name').notEmpty().withMessage('Nome do produto é obrigatório'),
+  body('price').isFloat({ min: 0 }).withMessage('Preço deve ser um número positivo'),
 
-    // 3. Salve o novo produto no banco de dados.
-    const product = await newProduct.save();
+  // Função de criação
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
 
-    // 4. Retorne o produto criado com status 201 (Created).
-    res.status(201).json(product);
-  } catch (err) {
-    res.status(500).send('Erro no servidor');
+    try {
+      // 1. Como esta é uma rota de admin, o middleware `isAdmin` já fez essa verificação para nós.
+      const newProduct = new Product(req.body);
+
+      // 2. Salve o novo produto no banco de dados.
+      const product = await newProduct.save();
+
+      // 3. Retorne o produto criado com status 201 (Created).
+      res.status(201).json(product);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Erro no servidor', message: err.message });
+    }
   }
-};
+];
 
-// SUA VEZ: (READ) GET /products - Aberto para todos
+// (READ) GET /products - Aberto para todos, com paginação e filtros
 exports.getProducts = async (req, res) => {
   try {
-    // DICA: Esta é uma rota pública para listar produtos.
-    // 1. Você pode opcionalmente verificar `req.query` por filtros, como `category`.
-    // Ex: const { category } = req.query;
-    const { category } = req.query;
+    const { category, page = 1, limit = 10 } = req.query;
 
-    // 2. Crie um objeto de filtro. Se houver uma categoria, o filtro será `{ category: category }`. Se não, será um objeto vazio `{}`.
+    // Filtro para categoria
     const filterObject = category ? { category: category } : {};
 
-    // 3. Use `Product.find(filterObject)` para buscar os produtos no banco.
-    const products = await Product.find(filterObject);
+    // Paginação: pula os primeiros (page - 1) * limit produtos e limita a quantidade
+    const products = await Product.find(filterObject)
+                                  .skip((page - 1) * limit)
+                                  .limit(Number(limit));
 
-    // 4. Retorne a lista de produtos encontrados em formato JSON.
+    // Retorna a lista de produtos encontrados
     res.status(200).json(products);
   } catch (err) {
-    res.status(500).send('Erro no servidor');
+    console.error(err);
+    res.status(500).json({ error: 'Erro no servidor', message: err.message });
   }
 };
 
 // (READ) GET /products/:id - Para buscar um único produto
 exports.getProductById = async (req, res) => {
   try {
-    // 1. Obtenha o id do produto a partir de `req.params`.
     const { id } = req.params;
 
-    // 2. Use `Product.findById(id)` para buscar o produto no banco de dados.
+    // 1. Encontre o produto pelo ID
     const product = await Product.findById(id);
 
-    // 3. Se o produto não for encontrado, retorne erro 404.
+    // 2. Se o produto não for encontrado, retorne erro 404
     if (!product) {
-      return res.status(404).send('Produto não encontrado');
+      return res.status(404).json({ error: 'Produto não encontrado' });
     }
 
-    // 4. Se encontrado, retorne o produto com status 200.
+    // 3. Retorne o produto com status 200
     res.status(200).json(product);
   } catch (err) {
-    res.status(500).send('Erro no servidor');
+    console.error(err);
+    res.status(500).json({ error: 'Erro no servidor', message: err.message });
   }
 };
 
 // (UPDATE) PUT /products/:id - Para atualizar um produto
 exports.updateProduct = async (req, res) => {
   try {
-    // 1. Obtenha o id do produto a partir de `req.params`.
     const { id } = req.params;
 
-    // 2. Encontre o produto pelo id e atualize os dados usando `req.body`.
+    // 1. Encontre o produto pelo ID e atualize
     const updatedProduct = await Product.findByIdAndUpdate(id, req.body, { new: true });
 
-    // 3. Se o produto não for encontrado, retorne erro 404.
+    // 2. Se o produto não for encontrado, retorne erro 404
     if (!updatedProduct) {
-      return res.status(404).send('Produto não encontrado');
+      return res.status(404).json({ error: 'Produto não encontrado' });
     }
 
-    // 4. Retorne o produto atualizado com status 200.
+    // 3. Retorne o produto atualizado com status 200
     res.status(200).json(updatedProduct);
   } catch (err) {
-    res.status(500).send('Erro no servidor');
+    console.error(err);
+    res.status(500).json({ error: 'Erro no servidor', message: err.message });
   }
 };
 
 // (DELETE) DELETE /products/:id - Para excluir um produto
 exports.deleteProduct = async (req, res) => {
   try {
-    // 1. Obtenha o id do produto a partir de `req.params`.
     const { id } = req.params;
 
-    // 2. Encontre o produto pelo id e exclua-o do banco de dados.
+    // 1. Encontre o produto pelo ID e exclua
     const deletedProduct = await Product.findByIdAndDelete(id);
 
-    // 3. Se o produto não for encontrado, retorne erro 404.
+    // 2. Se o produto não for encontrado, retorne erro 404
     if (!deletedProduct) {
-      return res.status(404).send('Produto não encontrado');
+      return res.status(404).json({ error: 'Produto não encontrado' });
     }
 
-    // 4. Retorne uma mensagem de sucesso com status 200.
-    res.status(200).send('Produto excluído com sucesso');
+    // 3. Retorne uma mensagem de sucesso com o nome do produto
+    res.status(200).json({ message: `Produto ${deletedProduct.name} excluído com sucesso` });
   } catch (err) {
-    res.status(500).send('Erro no servidor');
+    console.error(err);
+    res.status(500).json({ error: 'Erro no servidor', message: err.message });
   }
+};
+
+// Middleware para verificação de autenticação e autorização de admin
+exports.isAdmin = (req, res, next) => {
+  if (!req.user || !req.user.isAdmin) {
+    return res.status(403).json({ error: 'Acesso negado: Usuário não autorizado' });
+  }
+  next();
+};
+
+// Middleware para verificar se o usuário está autenticado
+exports.verifyToken = (req, res, next) => {
+  const token = req.headers['authorization'];
+  if (!token) {
+    return res.status(401).json({ error: 'Token não fornecido' });
+  }
+
+  // Verifique e decodifique o token aqui
+  // Se o token for válido, coloque o usuário no req.user
+  next();
 };
