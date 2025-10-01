@@ -35,7 +35,7 @@ Descrição EndPoints
   Erro: 'Produto não encontrado'
 
 
-
+---
 - ***Pasta Middleware:***
   - Essa pasta é a parte em que  faz autenticação ele valida e confirma se o usuario é um admin.
 
