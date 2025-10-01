@@ -14,7 +14,7 @@ Descrição EndPoints
 
 ***controllers/authControlller:*** é a parte de criação e login do usuario no site
 
-1. Primeiro item
+- Primeiro item
 2. Segundo item
 3. Terceiro item
 
