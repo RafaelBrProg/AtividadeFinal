@@ -10,3 +10,8 @@ Apos isso abra o arquivo e de um npm i pois ele depende do express, mongoose, bc
 .-.-.-.-.-.-.-.-.-.
 
 ---
+
+Descrição EndPoints
+
+---
+

@@ -13,7 +13,7 @@ exports.register = async (req, res) => {
     user = new User({ name, email, password });
     await user.save();
     // 5. Enviar uma resposta de sucesso
-    res.status(201).json({ msg: 'Usuário registrado com sucesso!' });
+    res.status(201).json({ msg: 'Usuário registrado no conselho da cidadela com sucesso!' });
     } catch (err) {
     // 6. Se algo der errado, capturar o erro e enviar uma resposta de erro genérica
     res.status(500).send('Erro no servidor');
