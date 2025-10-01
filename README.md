@@ -12,14 +12,18 @@ Apos isso abra o arquivo e de um npm i pois ele depende do express, mongoose, bc
 
 Descrição EndPoints
 
+- ***Pasta Controllers:***
+
 - _controllers/authControlller:_
   - É a parte que controla a criação e login do usuario no site.
-- ***controllers/cartControlller:***
+- _cartControlller:_
   - É a parte que controla a criação do carrinho e adicionar os produtos nele com base na id do produto e atualizar o carrinho.
-- ***controllers/orderControlller:***
+- _orderControlller:_
   - É a parte que controla o acesso ao seu carrinho monitorando o seu preço, estoque e criando o pedido.
-- ***controllers/productControlller:***
+- _controllers/productControlller:_
   - É a parte do admin que cria e controla os produtos, com base em id entre outros fatores como nome. 
 
+
+- ***Pasta Middleware:***
 ---
 
