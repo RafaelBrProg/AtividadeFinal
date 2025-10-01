@@ -14,9 +14,8 @@ Descrição EndPoints
 
 ***controllers/authControlller:*** é a parte de criação e login do usuario no site
 
-- Item 1
-  - Subitem 1.1
-  - Subitem 1.2
+- ***controllers/authControlller:***
+  - é a parte de criação e login do usuario no site
 - Item 2
 
 
