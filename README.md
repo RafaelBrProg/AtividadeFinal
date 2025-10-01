@@ -46,7 +46,7 @@ Descrição EndPoints
   - ***Pasta Routes:***
   - É a parte em que fica as rotas de produtos e autenticação
 
-    - ***Pasta src:***
+  - ***Pasta src:***
   - É onde fica os arquivos do site, de onde é coletado para a pagina.
 ---
 
