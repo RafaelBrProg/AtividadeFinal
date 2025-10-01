@@ -15,6 +15,8 @@ dist-ssr
 
 *.env
 
+*.send.bat
+
 
 # Editor directories and files
 .vscode/*
