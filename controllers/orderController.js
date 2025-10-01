@@ -8,7 +8,7 @@ try {
 // 1. Busque o usuário e popule os produtos do carrinho para ter acesso aos detalhes (preço, estoque, etc.).
 const user = await User.findById(req.user.id).populate('cart.product');
 if (user.cart.length === 0) {
-return res.status(400).json({ msg: 'Seu carrinho está vazio, seu Morty!' });
+return res.status(400).json({ msg: 'Você não tem nada no seu carrinho' });
 }
 
 let total = 0;
@@ -36,7 +36,6 @@ await order.save();
 // 5. Limpe o carrinho do usuário e salve a alteração.
 user.cart = [];
 await user.save();
-// DICA para o aluno: Aqui você também deve decrementar o estoque dos produtos vendidos.
 
 res.status(201).json(order);
 } catch (err) {

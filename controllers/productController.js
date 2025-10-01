@@ -118,7 +118,7 @@ exports.deleteProduct = async (req, res) => {
 // Middleware para verificação de autenticação e autorização de admin
 exports.isAdmin = (req, res, next) => {
   if (!req.user || !req.user.isAdmin) {
-    return res.status(403).json({ error: 'Acesso negado: Usuário não autorizado' });
+    return res.status(403).json({ error: 'Acesso negado: Rick não autorizado' });
   }
   next();
 };

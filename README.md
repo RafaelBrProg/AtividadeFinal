@@ -16,12 +16,24 @@ Descrição EndPoints
 
 - _controllers/authControlller:_(Create)
   - É a parte que controla a criação e login do usuario no site.
+  Sucesso:  'Usuário registrado no conselho da cidadela com sucesso!'
+  Erro:  'Um usuário com este e-mail já existe nesta dimensão.'
+
 - _cartControlller:_(Create, Update, Read e Delete)
   - É a parte que controla a criação do carrinho e adicionar os produtos nele com base na id do produto e atualizar o carrinho.
+  Sucesso:  'Produto não encontrado no carrinho'
+  Erro:  'Produto não encontrado no carrinho'
+
 - _orderControlller:_(Create e Read)
   - É a parte que controla o acesso ao seu carrinho monitorando o seu preço, estoque e criando o pedido.
+  Sucesso: 'Você não tem nada no seu carrinho'
+  Erro: 'Você ainda não fez nenhum pedido.'
+
 - _controllers/productControlller:_(Create, Read, Update e Delete)
   - É a parte do admin que cria e controla os produtos, com base em id entre outros fatores como nome. 
+  Sucesso: 'Acesso negado: Rick não autorizado'
+  Erro: 'Produto não encontrado'
+
 
 
 - ***Pasta Middleware:***
