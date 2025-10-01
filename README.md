@@ -12,8 +12,7 @@ Apos isso abra o arquivo e de um npm i pois ele depende do express, mongoose, bc
 
 Descrição EndPoints
 
-**controllers/authControlller:** é a parte de criação e login do usuario no site
-<span style="color: red;">controllers/authControlller:</span> é a parte de criação e login do usuario no site
+`**controllers/authControlller:** é a parte de criação e login do usuario no site`
 
 
 ---
