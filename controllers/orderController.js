@@ -14,7 +14,6 @@ return res.status(400).json({ msg: 'Seu carrinho está vazio, seu Morty!' });
 let total = 0;
 // 2. Crie um array com os produtos formatados para o pedido, copiando os dados, e calcule o total.
 const orderProducts = user.cart.map(item => {
-// DICA para o aluno: Aqui é um bom lugar para verificar o estoque (`item.product.stock`).
 total += item.quantity * item.product.price;
 return {
 productId: item.product.id,

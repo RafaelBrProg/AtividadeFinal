@@ -12,12 +12,14 @@ Apos isso abra o arquivo e de um npm i pois ele depende do express, mongoose, bc
 
 Descrição EndPoints
 
-***controllers/authControlller:*** é a parte de criação e login do usuario no site
-
 - ***controllers/authControlller:***
-  - é a parte de criação e login do usuario no site
-- Item 2
-
+  - É a parte que controla a criação e login do usuario no site.
+- ***controllers/cartControlller:***
+  - É a parte que controla a criação do carrinho e adicionar os produtos nele com base na id do produto e atualizar o carrinho.
+- ***controllers/orderControlller:***
+  - É a parte que controla o acesso ao seu carrinho monitorando o seu preço, estoque e criando o pedido.
+- ***controllers/productControlller:***
+  - É a parte do admin que cria e controla os produtos, com base em id entre outros fatores como nome. 
 
 ---
 
