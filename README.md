@@ -16,12 +16,12 @@ Descrição EndPoints
 
 - _controllers/authControlller:_
   - É a parte que controla a criação e login do usuario no site.(Create)
-- _cartControlller:_(Create, Update, Read e Delete)
-  - É a parte que controla a criação do carrinho e adicionar os produtos nele com base na id do produto e atualizar o carrinho.
-- _orderControlller:_(Create e Read)
-  - É a parte que controla o acesso ao seu carrinho monitorando o seu preço, estoque e criando o pedido.
-- _controllers/productControlller:_(Create, Read, Update e Delete)
-  - É a parte do admin que cria e controla os produtos, com base em id entre outros fatores como nome. 
+- _cartControlller:_
+  - É a parte que controla a criação do carrinho e adicionar os produtos nele com base na id do produto e atualizar o carrinho.(Create, Update, Read e Delete)
+- _orderControlller:_
+  - É a parte que controla o acesso ao seu carrinho monitorando o seu preço, estoque e criando o pedido.(Create e Read)
+- _controllers/productControlller:_
+  - É a parte do admin que cria e controla os produtos, com base em id entre outros fatores como nome.(Create, Read, Update e Delete)
 
 
 - ***Pasta Middleware:***
