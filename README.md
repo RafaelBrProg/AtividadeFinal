@@ -7,8 +7,6 @@ Para configurar o projeto você fara um git clone https://github.com/RafaelBrPro
 Apos isso abra o arquivo e de um npm i pois ele depende do express, mongoose, bcryptjs, jsonwebtoken, cors, dotenv e.s joi
 
 
-.-.-.-.-.-.-.-.-.-.
-
 ---
 
 Descrição EndPoints
